@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="web_standard" name="shell-type"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Outfit:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @layer base {
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overscroll-behavior: none;
+      }
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none::-webkit-scrollbar,
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none, .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulseOrb {
+      0%, 100% { transform: scale(1) translate(0px, 0px); opacity: 0.22; }
+      50% { transform: scale(1.15) translate(30px, -20px); opacity: 0.35; }
+    }
+    @keyframes pulseOrbAlt {
+      0%, 100% { transform: scale(1.1) translate(0px, 0px); opacity: 0.2; }
+      50% { transform: scale(0.95) translate(-40px, 25px); opacity: 0.32; }
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50% { opacity: 0.9; transform: scale(1.2); }
+    }
+    @keyframes waveBar {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
+    }
+    .glow-orb-primary { animation: pulseOrb 14s ease-in-out infinite; }
+    .glow-orb-secondary { animation: pulseOrbAlt 18s ease-in-out infinite; }
+    .twinkle-fast { animation: twinkle 3s ease-in-out infinite; }
+    .twinkle-slow { animation: twinkle 5s ease-in-out infinite; }
+    .wave-bar-1 { animation: waveBar 1.2s ease-in-out infinite; }
+    .wave-bar-2 { animation: waveBar 0.9s ease-in-out 0.2s infinite; }
+    .wave-bar-3 { animation: waveBar 1.4s ease-in-out 0.4s infinite; }
+    .wave-bar-4 { animation: waveBar 1.1s ease-in-out 0.1s infinite; }
+
+    .lyric-line-active {
+      background: rgba(255, 113, 206, 0.15);
+      border-left: 3px solid #ff71ce;
+      box-shadow: 0 0 25px rgba(255, 113, 206, 0.25);
+      transform: scale(1.01);
+      opacity: 1 !important;
+    }
+    .lyric-line-active .lyrics-main {
+      color: #ffaedc !important;
+      text-shadow: 0 0 16px rgba(255, 113, 206, 0.7);
+      font-weight: 700 !important;
+    }
+    .lyric-line-active .lyrics-trans {
+      color: #98e1ff !important;
+      font-weight: 500 !important;
+    }
+  </style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#ffaedc",
+            "on-primary-fixed-variant": "#880068",
+            "inverse-primary": "#a72683",
+            "on-error": "#690005",
+            "on-primary": "#600049",
+            "surface-tint": "#ffaedc",
+            "surface-container": "#211e28",
+            background: "#14121b",
+            "secondary-container": "#00cbfc",
+            "tertiary-container": "#00bd76",
+            surface: "#14121b",
+            "primary-container": "#ff71ce",
+            "surface-variant": "#36333e",
+            "on-tertiary-fixed-variant": "#005230",
+            "surface-container-highest": "#36333e",
+            "on-tertiary-container": "#004528",
+            "on-secondary-fixed": "#001f29",
+            "primary-fixed-dim": "#ffaedc",
+            secondary: "#98e1ff",
+            "inverse-on-surface": "#322f39",
+            "secondary-fixed-dim": "#58d5ff",
+            "surface-dim": "#14121b",
+            "primary-fixed": "#ffd8eb",
+            "on-primary-fixed": "#3b002c",
+            "tertiary-fixed": "#54ffaa",
+            "on-surface-variant": "#dabfcc",
+            "on-surface": "#e6e0ee",
+            "on-secondary": "#003544",
+            "surface-bright": "#3b3842",
+            "on-tertiary-fixed": "#002110",
+            "on-background": "#e6e0ee",
+            "secondary-fixed": "#b9eaff",
+            "error-container": "#93000a",
+            "on-error-container": "#ffdad6",
+            "on-primary-container": "#730058",
+            outline: "#a28a96",
+            "on-secondary-fixed-variant": "#004d62",
+            "surface-container-lowest": "#0f0d16",
+            "on-tertiary": "#003920",
+            "surface-container-low": "#1c1a24",
+            tertiary: "#00e38e",
+            "outline-variant": "#54414b",
+            "inverse-surface": "#e6e0ee",
+            "tertiary-fixed-dim": "#00e38e",
+            "on-secondary-container": "#005267",
+            "surface-container-high": "#2b2933",
+            error: "#ffb4ab"
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          },
+          fontFamily: {
+            "headline-lg": ["Outfit"],
+            "label-lg": ["Outfit"],
+            "body-sm": ["Inter"],
+            "label-md": ["Outfit"],
+            "display-lg-mobile": ["Outfit"],
+            "display-lg": ["Outfit"],
+            "headline-lg-mobile": ["Outfit"],
+            "headline-md": ["Outfit"],
+            "title-md": ["Outfit"],
+            "label-sm": ["Outfit"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Outfit"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#0d0b14] text-white font-body-md text-body-md min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary flex flex-col justify-between">
+<!-- Ambient Lighting Effects -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute -top-[12%] -left-[8%] w-[550px] h-[550px] rounded-full bg-primary-container/20 blur-[130px] glow-orb-primary"></div>
+<div class="absolute top-[35%] -right-[10%] w-[620px] h-[620px] rounded-full bg-secondary-container/15 blur-[140px] glow-orb-secondary"></div>
+<div class="absolute -bottom-[15%] left-[20%] w-[500px] h-[500px] rounded-full bg-tertiary-container/15 blur-[130px] glow-orb-primary"></div>
+<div class="absolute top-[18%] left-[24%] w-1.5 h-1.5 rounded-full bg-primary-fixed shadow-[0_0_8px_#ffaedc] twinkle-fast"></div>
+<div class="absolute top-[32%] right-[28%] w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_#98e1ff] twinkle-slow"></div>
+<div class="absolute top-[68%] left-[12%] w-1 h-1 rounded-full bg-tertiary-fixed shadow-[0_0_6px_#54ffaa] twinkle-fast"></div>
+<div class="absolute top-[82%] right-[16%] w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_#ffaedc] twinkle-slow"></div>
+<div class="absolute top-[48%] left-[78%] w-1 h-1 rounded-full bg-secondary-fixed shadow-[0_0_6px_#b9eaff] twinkle-fast"></div>
+</div>
+<!-- Persistent Floating Top Navbar (Desktop & Mobile Responsive) -->
+<header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] md:max-w-[860px] z-50 bg-[#14121b]/80 backdrop-blur-xl border border-white/10 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-5 md:px-6 py-2.5 flex items-center justify-between transition-all">
+<!-- Brand Logo -->
+<a class="flex items-center gap-1.5 group shrink-0" data-path="home" href="#">
+<span class="font-headline-sm text-lg md:text-headline-sm text-primary group-hover:text-primary-container transition-colors tracking-wider font-bold">NUSRAT</span>
+<span class="text-tertiary text-sm md:text-base font-headline-sm transition-transform group-hover:rotate-45 group-hover:scale-125">✦</span>
+</a>
+<!-- Desktop Navigation Tabs (Hidden on <768px) -->
+<nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-surface-container/70 shadow-inner" data-active-classes="bg-primary-container text-on-primary font-bold shadow-[0_0_20px_rgba(255,113,206,0.45)]">
+<a class="px-4 py-1.5 rounded-full font-label-lg text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200" data-path="home" href="#">Home</a>
+<a class="px-4 py-1.5 rounded-full font-label-lg text-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200" data-path="frames" href="#">Frames</a>
+<a aria-current="page" class="px-4 py-1.5 rounded-full transition-all duration-200 bg-primary-container text-on-primary font-bold shadow-[0_0_20px_rgba(255,113,206,0.45)]" data-path="melodies" href="#">Melodies</a>
+</nav>
+<!-- Desktop Avatar (Hidden on <768px) -->
+<div class="hidden md:flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_16px_rgba(255,174,220,0.5)] cursor-pointer hover:scale-105 transition-transform" title="Profile">
+<span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+</div>
+</div>
+<!-- Mobile Hamburger Button (Visible on <768px) -->
+<button aria-label="Toggle navigation menu" class="md:hidden flex flex-col justify-center items-center w-9 h-9 rounded-full bg-surface-container/80 border border-white/10 hover:border-primary/50 text-white hover:text-primary transition-all p-2 focus:outline-none" id="hamburgerBtn">
+<span class="w-4 h-0.5 bg-current rounded-full mb-1 transition-transform"></span>
+<span class="w-4 h-0.5 bg-current rounded-full mb-1 transition-transform"></span>
+<span class="w-3.5 h-0.5 bg-current rounded-full transition-transform"></span>
+</button>
+</header>
+<!-- Mobile Drawer Backdrop -->
+<div class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity duration-300" id="drawerBackdrop"></div>
+<!-- Mobile Sliding Drawer Menu -->
+<aside class="fixed inset-y-0 right-0 w-72 sm:w-80 bg-[#14121b]/95 backdrop-blur-2xl border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 ease-out shadow-[-10px_0_40px_rgba(0,0,0,0.8)] flex flex-col p-6" id="mobileDrawer">
+<div class="flex items-center justify-between pb-6 border-b border-white/10">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-lg text-primary font-bold">NUSRAT</span>
+<span class="text-tertiary text-sm">✦</span>
+</div>
+<button aria-label="Close menu" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-white transition-colors" id="closeDrawerBtn">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Mobile Drawer Links -->
+<div class="flex flex-col gap-2 mt-6">
+<a class="px-4 py-3 rounded-2xl font-label-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-all flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span>Home</span>
+</a>
+<a class="px-4 py-3 rounded-2xl font-label-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-all flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[20px]">photo_library</span>
+<span>Frames</span>
+</a>
+<a class="px-4 py-3 rounded-2xl font-label-lg bg-primary-container text-on-primary font-bold shadow-[0_0_20px_rgba(255,113,206,0.4)] flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[20px]">queue_music</span>
+<span>Melodies</span>
+</a>
+<a class="px-4 py-3 rounded-2xl font-label-lg text-on-surface-variant hover:text-white hover:bg-surface-container transition-all flex items-center gap-3 mt-2" href="#">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+<span>Profile &amp; Settings</span>
+</a>
+</div>
+<!-- Mini Live Status in Drawer -->
+<div class="mt-auto pt-6 border-t border-white/10 flex flex-col gap-3">
+<div class="flex items-center justify-between text-xs text-on-surface-variant">
+<span>Lossless Stream</span>
+<span class="text-tertiary font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+          48kHz / 24-bit
+        </span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low/80 border border-white/5 flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#ffaedc]"></div>
+<span class="text-xs text-on-surface truncate">Harmonic Sanctuary Active</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Container with safe top clearance -->
+<main class="relative z-10 w-full pt-28 sm:pt-32 pb-12 px-4 sm:px-6 md:px-12 max-w-7xl mx-auto flex-1 flex flex-col">
+<!-- Header & Mood Bar -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<div class="flex flex-wrap items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-container-high text-tertiary font-label-sm text-xs uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            Harmonic Sanctuary
+          </span>
+<span class="text-on-surface-variant text-xs">✦ 48kHz / 24-bit Lossless Stream</span>
+</div>
+<h1 class="text-2xl sm:text-3xl md:text-4xl font-headline-lg font-bold text-white tracking-tight">
+          Melodies &amp; Nocturnes
+        </h1>
+<p class="font-body-md text-sm sm:text-base text-on-surface-variant max-w-xl">
+          Curated sonic frequencies for late-night dreaming, melancholic afternoons, and soulful Bengali lo-fi chill.
+        </p>
+</div>
+</div>
+<!-- Bento Grid Stage: Master Turntable Player + Lyric/Mood Sidebar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-8">
+<!-- Left Column: Master Turntable Player (7 Cols) -->
+<div class="lg:col-span-7 bg-[#1c1a24]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+<!-- Glow Refraction Underlay -->
+<div class="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-primary-container/15 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-12 -top-12 w-60 h-60 rounded-full bg-secondary-container/15 blur-3xl pointer-events-none"></div>
+<!-- Turntable Vinyl & Track Visualizer -->
+<div class="flex flex-col sm:flex-row items-center gap-5 sm:gap-7 z-10">
+<!-- Turntable Vinyl Disc -->
+<div class="relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 shrink-0 flex items-center justify-center">
+<!-- Ambient Glow Aura behind Vinyl -->
+<div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary-container via-secondary to-tertiary blur-xl opacity-30 transition-all duration-700 animate-pulse" id="vinyl-aura"></div>
+<!-- Vinyl Base Body -->
+<div class="w-full h-full rounded-full bg-surface-container-lowest p-2 shadow-[0_8px_30px_rgba(0,0,0,0.7)] flex items-center justify-center relative transition-transform duration-700 ease-linear [animation:spin_20s_linear_infinite] running" id="vinyl-disc">
+<!-- Vinyl Grooves -->
+<div class="w-full h-full rounded-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-surface-container-high via-surface-container-lowest to-surface-container-high p-3 sm:p-4 flex items-center justify-center shadow-inner">
+<div class="w-full h-full rounded-full bg-surface-container-lowest flex items-center justify-center relative overflow-hidden">
+<!-- Album Artwork -->
+<img alt="Album cover" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full object-cover shadow-lg" id="player-art" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKhWIC4OY19hs5QTkmnTbsr93F3-SKwMB_hAg52qa2OA400DUWPhXYb6-MNfyys_-tTgcaYRIr-1kcl6-ffSstVUfxN5vWq3pZJXQ5pxv8o_xCPSSKI96phQ6wF-zhk7uFDP7Cns4i_fqbcAEJ7lcxEIotaoJBIAITkP_Nv8dncsGP_Qs2jRV6JXNq2TDiH1IsgXTFhkzCU6DL0-fFMuMA72c0SBsUjGPXqkXaDtAO0BKAXZdbn10"/>
+<!-- Center Spindle Hole -->
+<div class="absolute w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-surface-container-lowest shadow-inner flex items-center justify-center">
+<div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-primary shadow-[0_0_8px_#ffaedc]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Stylized Mini Tonearm -->
+<div class="absolute -top-2 right-1 sm:-top-3 sm:right-2 w-8 sm:w-10 h-14 sm:h-16 pointer-events-none flex flex-col items-end">
+<div class="w-3 sm:w-3.5 h-3 sm:h-3.5 rounded-full bg-secondary shadow-[0_0_10px_#98e1ff]"></div>
+<div class="w-0.5 h-10 sm:h-12 bg-on-surface-variant/70 origin-top rotate-12 transition-transform duration-300"></div>
+</div>
+</div>
+<!-- Track Info & Dynamic Frequency Waveform -->
+<div class="flex flex-col items-center sm:items-start text-center sm:text-left flex-1 min-w-0 w-full">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#00e38e]"></span>
+<span class="font-label-sm text-xs text-tertiary uppercase tracking-widest" id="player-badge">Bangla Soul</span>
+</div>
+<h2 class="font-headline-md text-xl sm:text-2xl text-on-surface font-semibold tracking-tight truncate w-full" id="player-title">Ghum Ghum Chand</h2>
+<p class="font-body-md text-sm text-secondary tracking-wide mb-3 sm:mb-4 truncate w-full" id="player-artist">Shreya Ghoshal &amp; Lo-Fi Collective</p>
+<!-- Animated Neon Audio Waveform Bars -->
+<div class="flex items-end gap-1.5 h-9 w-full py-1 justify-center sm:justify-start" id="audio-visualizer-bars">
+<span class="w-1 rounded-full bg-secondary-container transition-all duration-150 h-5 wave-bar-1"></span>
+<span class="w-1 rounded-full bg-primary-container transition-all duration-150 h-8 wave-bar-2"></span>
+<span class="w-1 rounded-full bg-tertiary transition-all duration-150 h-4 wave-bar-3"></span>
+<span class="w-1 rounded-full bg-secondary transition-all duration-150 h-7 wave-bar-4"></span>
+<span class="w-1 rounded-full bg-primary transition-all duration-150 h-9 wave-bar-1"></span>
+<span class="w-1 rounded-full bg-secondary-container transition-all duration-150 h-3 wave-bar-3"></span>
+<span class="w-1 rounded-full bg-primary-container transition-all duration-150 h-7 wave-bar-2"></span>
+<span class="w-1 rounded-full bg-tertiary transition-all duration-150 h-8 wave-bar-4"></span>
+<span class="w-1 rounded-full bg-secondary transition-all duration-150 h-6 wave-bar-1"></span>
+<span class="w-1 rounded-full bg-primary transition-all duration-150 h-4 wave-bar-2"></span>
+<span class="w-1 rounded-full bg-secondary-container transition-all duration-150 h-8 wave-bar-3"></span>
+<span class="w-1 rounded-full bg-tertiary-fixed transition-all duration-150 h-5 wave-bar-4"></span>
+</div>
+</div>
+</div>
+<!-- Bottom Controls & Scrub Bar -->
+<div class="mt-6 z-10 flex flex-col gap-2 pt-3 border-t border-white/5">
+<!-- Progress Bar -->
+<div class="flex flex-col gap-1.5 w-full">
+<div class="relative w-full h-2 rounded-full bg-surface-container-high/70 cursor-pointer overflow-hidden group/bar" id="seek-container">
+<div class="absolute top-0 left-0 bottom-0 rounded-full bg-gradient-to-r from-secondary-container via-primary-container to-tertiary shadow-[0_0_12px_rgba(255,113,206,0.5)] transition-[width] duration-300 ease-linear" id="seek-fill" style="width: 0%;"></div>
+</div>
+<div class="flex justify-between items-center text-xs text-on-surface-variant px-0.5">
+<span id="time-current">00:00</span>
+<span class="text-tertiary font-semibold hidden xs:inline">✦ STEREO 96K</span>
+<span id="time-total">03:42</span>
+</div>
+</div>
+<!-- Playback Actions -->
+<div class="flex items-center justify-between mt-2">
+<!-- Secondary Actions -->
+<div class="flex items-center gap-1.5 sm:gap-2">
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-secondary transition-all hover:bg-surface-container-high cursor-pointer" id="btn-shuffle" title="Shuffle">
+<span class="material-symbols-outlined text-[18px]">shuffle</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary transition-all hover:bg-surface-container-high cursor-pointer" id="btn-repeat" title="Repeat Single">
+<span class="material-symbols-outlined text-[18px]">repeat_one</span>
+</button>
+</div>
+<!-- Central Buttons -->
+<div class="flex items-center gap-2 sm:gap-3">
+<button aria-label="Previous Track" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-surface-container/90 hover:bg-surface-container-high flex items-center justify-center text-on-surface hover:text-secondary-fixed transition-all transform active:scale-95 shadow-md cursor-pointer" id="btn-prev">
+<span class="material-symbols-outlined text-[22px]">skip_previous</span>
+</button>
+<!-- Neon Highlight Play Button -->
+<button aria-label="Play or Pause" class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-tr from-primary-container to-primary text-on-primary flex items-center justify-center transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_24px_rgba(255,113,206,0.65)] hover:shadow-[0_0_32px_rgba(255,113,206,0.85)] cursor-pointer" id="btn-play-pause">
+<span class="material-symbols-outlined text-[28px] sm:text-[30px]" id="play-icon" style='font-variation-settings: "FILL" 1;'>pause</span>
+</button>
+<button aria-label="Next Track" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-surface-container/90 hover:bg-surface-container-high flex items-center justify-center text-on-surface hover:text-secondary-fixed transition-all transform active:scale-95 shadow-md cursor-pointer" id="btn-next">
+<span class="material-symbols-outlined text-[22px]">skip_next</span>
+</button>
+</div>
+<!-- Volume Slider -->
+<div class="flex items-center gap-1 sm:gap-2">
+<button aria-label="Mute/Unmute" class="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer" id="btn-mute">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+<div class="w-14 sm:w-20 md:w-24 h-1.5 rounded-full bg-surface-container-high relative cursor-pointer group/vol" id="vol-container">
+<div class="h-full w-3/4 rounded-full bg-secondary group-hover/vol:bg-secondary-fixed transition-all" id="vol-fill"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Dynamic Synced Live Lyrics (5 Cols) -->
+<div class="lg:col-span-5 bg-[#1c1a24]/60 backdrop-blur-xl border border-white/10 rounded-3xl p-5 sm:p-7 shadow-2xl flex flex-col h-[380px] sm:h-[420px] lg:h-[400px] relative overflow-hidden group hover:border-primary-container/40 transition-colors" id="lyrics-card">
+<div class="absolute -right-12 -top-10 w-52 h-52 rounded-full bg-secondary-container/15 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-10 -bottom-10 w-52 h-52 rounded-full bg-primary-container/15 blur-3xl pointer-events-none"></div>
+<!-- Lyrics Header -->
+<div class="relative z-10 flex items-center justify-between pb-3 border-b border-surface-container-high shrink-0">
+<div class="flex items-center gap-2">
+<span class="text-tertiary text-base animate-pulse">✦</span>
+<span class="font-label-lg text-sm sm:text-base text-on-surface font-semibold tracking-wide">Live Lyrics</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/15 text-primary text-[11px] font-label-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+              Sync
+            </span>
+</div>
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container/70 border border-secondary-container/40 hover:border-secondary-container shadow-[0_0_12px_rgba(0,203,252,0.25)] transition-all cursor-pointer" id="lyrics-autoscroll-toggle">
+<span class="material-symbols-outlined text-[15px] text-tertiary animate-pulse" id="autoscroll-icon">graphic_eq</span>
+<span class="text-xs text-secondary font-medium tracking-wide" id="autoscroll-label">Auto-scroll ON</span>
+</button>
+</div>
+<!-- Lyrics Scroll Stream -->
+<div class="relative z-10 my-2 flex-1 overflow-y-auto overflow-x-hidden pr-1 select-none scroll-smooth" id="lyrics-scroll-container" style="mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%); scrollbar-width: none;">
+<div class="flex flex-col gap-3 py-10 transition-all duration-300" id="lyrics-stream"></div>
+</div>
+<!-- Lyrics Bottom Bar -->
+<div class="relative z-10 pt-3 border-t border-surface-container-high flex items-center justify-between text-xs text-on-surface-variant shrink-0">
+<button class="flex items-center gap-1.5 group/toggle hover:text-on-surface transition-colors cursor-pointer" id="lyrics-lang-toggle">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed shadow-[0_0_6px_#b9eaff]"></span>
+<span class="text-secondary group-hover/toggle:text-secondary-fixed font-medium truncate max-w-[150px] sm:max-w-none" id="lyrics-lang-label">Bengali &amp; English Bilingual</span>
+</button>
+<button class="flex items-center gap-1 text-primary hover:text-primary-fixed transition-colors font-semibold px-2 py-1 rounded-full hover:bg-primary-container/10 cursor-pointer" id="lyrics-karaoke-btn">
+<span class="material-symbols-outlined text-[16px]">subtitles</span>
+<span>Karaoke Mode</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Track Filter Navigation Pills & Audio Counter -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+<!-- Language & Favorites Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar flex-nowrap sm:flex-wrap w-full sm:w-auto" id="filter-chip-group">
+<button class="filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-primary-container text-on-primary font-bold shadow-[0_0_16px_rgba(255,113,206,0.35)] cursor-pointer" data-filter="all">
+          All (10)
+        </button>
+<button class="filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer" data-filter="urdu">
+          Urdu
+        </button>
+<button class="filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer" data-filter="bangla">
+          Bangla
+        </button>
+<button class="filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer" data-filter="panjabi">
+          Panjabi
+        </button>
+<button class="filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer" data-filter="english">
+          English
+        </button>
+<button class="filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer" data-filter="favorites">
+          Favorites ❤️
+        </button>
+</div>
+<!-- Live info indicator -->
+<div class="hidden sm:flex items-center gap-1.5 text-xs text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed shadow-[0_0_6px_#b9eaff]"></span>
+<span>Click any track to transition master audio</span>
+</div>
+</div>
+<!-- Playlist Queue Rail (10 Curated Tracks) -->
+<div class="flex flex-col gap-2" id="playlist-container">
+<!-- Track 1 (Active) -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer bg-surface-container-low/90 shadow-[0_0_20px_rgba(255,113,206,0.15)]" data-artist="Shreya Ghoshal &amp; Lo-Fi Collective" data-cat="bangla" data-duration="03:42" data-fav="true" data-id="1" data-lang="bangla" data-title="Ghum Ghum Chand">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm group-hover:hidden text-primary font-bold">01</span>
+<span class="material-symbols-outlined text-primary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Ghum Ghum Chand" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKhWIC4OY19hs5QTkmnTbsr93F3-SKwMB_hAg52qa2OA400DUWPhXYb6-MNfyys_-tTgcaYRIr-1kcl6-ffSstVUfxN5vWq3pZJXQ5pxv8o_xCPSSKI96phQ6wF-zhk7uFDP7Cns4i_fqbcAEJ7lcxEIotaoJBIAITkP_Nv8dncsGP_Qs2jRV6JXNq2TDiH1IsgXTFhkzCU6DL0-fFMuMA72c0SBsUjGPXqkXaDtAO0BKAXZdbn10"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base font-semibold truncate text-primary max-w-[130px] sm:max-w-none">Ghum Ghum Chand</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Shreya Ghoshal &amp; Lo-Fi Collective • Bengali Classic</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold">Bangla</span>
+<button aria-label="Favorite" class="btn-heart text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">03:42</span>
+</div>
+</div>
+<!-- Track 2 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Moushumi Bhowmik (Chillstep Rework)" data-cat="bangla" data-duration="04:15" data-fav="true" data-id="2" data-lang="bangla" data-title="Ami Shunechi Shedin">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">02</span>
+<span class="material-symbols-outlined text-secondary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Ami Shunechi Shedin" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9jIcqYambSegCnF7LAf5GWMVA-KE7qNPyhvXkTMx5bdh7e0ABOzdNafpNblkrH0TRjryTxgiDsTS-SL9VKMagx0ge0p_DEbL66ECidm3nP9rCVCDDuLcdrUOlkEYtuQ4IULPLaAY0Qm2k65CIT-kGyFjMQxRiWdpWdhlm09kohyfa3iILiWCBqdJBs-Eao5SuIMNXLSEHMc6CcvnP3g2YPoLSLOiGxsXx28-nSUKoqySPkYwA1V0"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-secondary max-w-[130px] sm:max-w-none">Ami Shunechi Shedin</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Moushumi Bhowmik • Melancholy Acoustic</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-xs font-semibold">Bangla</span>
+<button aria-label="Favorite" class="btn-heart text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">04:15</span>
+</div>
+</div>
+<!-- Track 3 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Animes Roy &amp; Kanon Baby" data-cat="bangla" data-duration="05:08" data-fav="false" data-id="3" data-lang="bangla" data-title="Coke Studio Bangla - Shob Lokey Koy">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">03</span>
+<span class="material-symbols-outlined text-tertiary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Coke Studio Bangla" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKyIDl0DPoxi0XIB9YliaegD3abXtt1xQr1JEK8SBPBYKxqefbZIHOIHkREa7G-uI3BS6LLugPJYRZXJNXcnX58Vy0BXiZrP6ULhWqXKUwv-g4WdIciwQE4AlpAHFHaVEkQvAY3DXQfdEoaXHK-PcD-sh_F32y95QWjVhhW6rJ6AqTpP6pqhlVGwPpzNlh-btMrpTyINvRrRoBhtgAmOGw5tg2wFsIZO5m2DX4zTy_3a55iS04vSE"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-tertiary max-w-[130px] sm:max-w-none">Coke Studio Bangla - Shob Lokey Koy</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Animes Roy &amp; Kanon Baby • Mystic Baul Groove</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-semibold">Bangla</span>
+<button aria-label="Favorite" class="btn-heart text-on-surface-variant hover:text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]">favorite_border</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">05:08</span>
+</div>
+</div>
+<!-- Track 4 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Artcell (Midnight Unplugged)" data-cat="bangla" data-duration="04:42" data-fav="true" data-id="4" data-lang="bangla" data-title="Cholo Shobai">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">04</span>
+<span class="material-symbols-outlined text-primary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Cholo Shobai" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClD77Hk2kd-bBO1GIZJgzZlCovTceR3WkPX5aN9KVTBeLqRsbwR5_BNeStKz74EWKk8TWIpEIc3lV4NHSv7wCLzUVoqm7pBk1dwvq3dtWsKqxWwXrWBZBs0AcQPqeEuY4gx-FAVkrPqPmiIQh6p_w8ZvfpQRpHeMbMj_pRLrAqIBBVRPyW4XBXHVluDqSa5b1NKWQk8G2xBxgNSQKTtDT--96IDQxj1YIXpHaDvceljdzfR-II3pA"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-primary max-w-[130px] sm:max-w-none">Cholo Shobai</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Artcell • Acoustic Unplugged</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold">Bangla</span>
+<button aria-label="Favorite" class="btn-heart text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">04:42</span>
+</div>
+</div>
+<!-- Track 5 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Nusrat Fateh Ali Khan (Lo-Fi Collective)" data-cat="urdu" data-duration="03:48" data-fav="true" data-id="5" data-lang="urdu" data-title="Afreen Afreen (Lo-Fi Ghazal)">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">05</span>
+<span class="material-symbols-outlined text-secondary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Afreen Afreen" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn7yfCW4eyxevICU13Jla4sFJK3lT0oQC5noxi-XNfPWTeN2ZyV1tAEoLXnsZzznEVd0v2PibhJ9i006xeBFMVf-Vbc9oXI2Fyhug4NbSA-e6eWdyViF2-mNnhXVnXIPkMBwc9R7rN38l7pBOq41flJV1DPtZdyWpmuQ0fuvrsva2e51qZvr9Io0ZErQlmPgmCVlfS-k0le2L6ygOAjWkVXemFjBwMmOOPxn1ac-jMDQDauo23d5Y"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-secondary max-w-[130px] sm:max-w-none">Afreen Afreen (Lo-Fi Ghazal)</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Nusrat Fateh Ali Khan • 432Hz Chill Ghazal</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-xs font-semibold">Urdu</span>
+<button aria-label="Favorite" class="btn-heart text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">03:48</span>
+</div>
+</div>
+<!-- Track 6 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="JVKE (Acoustic Strings Session)" data-cat="english" data-duration="03:29" data-fav="false" data-id="6" data-lang="english" data-title="Golden Hour - Acoustic">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">06</span>
+<span class="material-symbols-outlined text-tertiary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Golden Hour" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPWOwfCzNCzvLg16z2-klFUMEaw0_gknSYtc6lI-U2-7IJFUXGprZwDSjsz5keogldO0-SEQyI4Z47aBtBPv9qkh1ENp_IkVTSYHdWmV1wOGCmqYNGP5UX6WhaDYh7d4PEIjLmgLF1tQ6QhtrK9943hn5x9_0QB9YWxBgF0Ba_DMfmVRKT5zqi9E1VTDl6yko0KRrGufP892F8Xe4-kTfNrTxmaAUcb0TYB7JZcNSQGe0eqJG71tA"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-tertiary max-w-[130px] sm:max-w-none">Golden Hour - Acoustic</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">JVKE • Intimate Piano Acoustic</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-semibold">English</span>
+<button aria-label="Favorite" class="btn-heart text-on-surface-variant hover:text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]">favorite_border</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">03:29</span>
+</div>
+</div>
+<!-- Track 7 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Tahsan &amp; Armeen (Lo-fi Cut)" data-cat="bangla" data-duration="03:51" data-fav="false" data-id="7" data-lang="bangla" data-title="Dusk Acoustic Whispers">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">07</span>
+<span class="material-symbols-outlined text-primary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Dusk Acoustic Whispers" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxJ_iqREDBdIlWVrqHeVmIU6WIX6TCtS-xzl-ZT69EYfzjtP-1y84-Lbd3ktMG4VGFgn1ki5jwfSDp__PKMHh9uQJMsjd7_TptqnAAVvXojFO36_Oo06f6NSdG0eH2KERqX8CjxlZ3pgDlorcGMjtHFG7xZbWAhjyXWvcdQtLQMyY9gtNT5oksTEs3KBJbIevFOBw_Qi4BFHXhjtDdHScSoiOsGDbjMRUDj6ysl_EnnG88OtAmgX0"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-primary max-w-[130px] sm:max-w-none">Dusk Acoustic Whispers</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Tahsan &amp; Armeen • Intimate Acoustic</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold">Bangla</span>
+<button aria-label="Favorite" class="btn-heart text-on-surface-variant hover:text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]">favorite_border</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">03:51</span>
+</div>
+</div>
+<!-- Track 8 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Nocturnal Cafe Session" data-cat="english" data-duration="04:02" data-fav="true" data-id="8" data-lang="english" data-title="Rainy Window Coffee - Lo-Fi Chill">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">08</span>
+<span class="material-symbols-outlined text-secondary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Rainy Window Coffee" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXy2ntatVu4q2yEUVa9PmeKmj_sA2AbKrAaMI4T1dA5PskzMNv5RkqVAcQ2KwoQGGet1xH5uDRjLAW9VAQwpqQ4DdQCERd_AqSdHV8OIsaNOpnQa5TXSrO5JTzQjGclwH9qKe1iYC-RrJ7GhIxT63mhXVJesowIa9D_lCT38OlQaqqcnAEyVz0yIyKA_kKQwQ29hnzYyi1YumayFelo9Lz15CUTBLtCYNrdNOg17pC7I7ltfLRuEk"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-secondary max-w-[130px] sm:max-w-none">Rainy Window Coffee - Lo-Fi Chill</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Nocturnal Cafe Session • ASMR &amp; Rain</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary text-xs font-semibold">English</span>
+<button aria-label="Favorite" class="btn-heart text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">04:02</span>
+</div>
+</div>
+<!-- Track 9 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Nusrat &amp; Rahat (Sufi Ambient Edit)" data-cat="panjabi" data-duration="05:14" data-fav="false" data-id="9" data-lang="panjabi" data-title="Kinna Sohna - Panjabi Sufi">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">09</span>
+<span class="material-symbols-outlined text-tertiary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Kinna Sohna" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvj4wTKIzNtjVPG_HTpnySvuEf94AEnzFdRn5brS4hjS4b7YAkeHosu0qi9RkqcftNjz85_RrQTc4xpxgSET0rQEbMbtkkOtJCHjGap468leyWJ4tR51yMR88ik9K7bL4eXm06AyQiHouIoByQjYUGq_gZINTZJEW4yw3srmiKhTofjvZPn2RBfnBtINWkBNreu3RV9EDUxtqfvsLpZd8g0OxjMm_fv523Y1asGyGwPs1To7Hxhgc"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-tertiary max-w-[130px] sm:max-w-none">Kinna Sohna - Panjabi Sufi</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Nusrat &amp; Rahat • Panjabi Qawwali Chill</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary text-xs font-semibold">Panjabi</span>
+<button aria-label="Favorite" class="btn-heart text-on-surface-variant hover:text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]">favorite_border</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">05:14</span>
+</div>
+</div>
+<!-- Track 10 -->
+<div class="track-row group flex items-center justify-between p-3 sm:p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md hover:bg-surface-container shadow-sm transition-all duration-200 cursor-pointer" data-artist="Nusrat &amp; Celestial Echoes" data-cat="english" data-duration="04:20" data-fav="true" data-id="10" data-lang="english" data-title="Starlight Reverie">
+<div class="flex items-center gap-3 sm:gap-4 min-w-0">
+<div class="w-6 sm:w-8 flex items-center justify-center text-center shrink-0">
+<span class="track-index text-xs sm:text-sm text-on-surface-variant group-hover:hidden">10</span>
+<span class="material-symbols-outlined text-primary text-[18px] sm:text-[20px] hidden group-hover:block" style='font-variation-settings: "FILL" 1;'>play_arrow</span>
+</div>
+<img alt="Starlight Reverie" class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg object-cover shadow-sm shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuPZ4u8JE8SxF4ote3IpChQKHGBBKEjCj54giMMTVm-Qd8OhSLqxEapyNYOSV57goLJbC343tCqZBzna_KvOA0R2PGLx2XqUHzb8AoftrGkFGRZQJOczTAqujaa3mB85YrJrVtpxStyDCJV1GOgzbnNbgvn3pi65sm5CgiDfssftJCoSVigM14WnV-jY2nm2valY6sTg3mCwK_9dRZGvOxE8K2nrTLRfl0KaBENQOaBIRfCFg9Hww"/>
+<div class="flex flex-col min-w-0">
+<span class="track-name text-sm sm:text-base text-on-surface font-semibold truncate group-hover:text-primary max-w-[130px] sm:max-w-none">Starlight Reverie</span>
+<span class="text-xs text-on-surface-variant truncate max-w-[130px] sm:max-w-none">Nusrat &amp; Celestial Echoes • Synthwave Chill</span>
+</div>
+</div>
+<div class="flex items-center gap-2 sm:gap-4 shrink-0">
+<span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-semibold">English</span>
+<button aria-label="Favorite" class="btn-heart text-primary hover:scale-110 transition-transform p-1 cursor-pointer">
+<span class="material-symbols-outlined text-[18px] sm:text-[20px]" style='font-variation-settings: "FILL" 1;'>favorite</span>
+</button>
+<span class="text-xs text-on-surface-variant w-10 sm:w-12 text-right">04:20</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Responsive Footer -->
+<footer class="relative z-10 w-full border-t border-white/5 py-6 px-4 sm:px-8 mt-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50 text-center sm:text-left bg-[#0f0d16]/80 backdrop-blur-xl">
+<div class="flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
+<span class="font-headline-sm text-sm text-primary font-bold">NUSRAT</span>
+<span class="text-tertiary">✦</span>
+<span class="text-on-surface-variant">Curated nocturnal aesthetics &amp; harmonic frequencies</span>
+</div>
+<div class="flex items-center gap-4">
+<span>Crafted with pure stardust</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#00e38e] animate-pulse"></span>
+<span class="font-semibold text-tertiary uppercase tracking-wider text-[10px]">Transmitting Live</span>
+</div>
+</div>
+</footer>
+<!-- Lyrics Engine Script -->
+<script id="lyrics-engine-script">
+    (function() {
+      const songLyricsDatabase = {
+        '1': [
+          { time: 0, text: 'ঘুম ঘুম চাঁদ ঝিকিমিকি তারা', trans: 'The moon is drowsy, and the stars twinkle softly in late-night repose.' },
+          { time: 18, text: 'এই রাত ডাকে আমায় সুদূরে ভেসে যেতে', trans: 'This silent night calls me to drift far across ethereal skies.' },
+          { time: 42, text: 'বাতাসে ভাসে এক চেনা সুরের বাঁশি', trans: 'A familiar melodic flute echoes gently upon the nocturnal breeze.' },
+          { time: 76, text: 'নিঝুম অরণ্যে পথ হারালো আমার ছায়া', trans: 'In the tranquil grove, my shadow dissolves amidst neon mists.' },
+          { time: 110, text: 'তোমার আঁখির মায়ায় হারিয়ে যায় নিশীথ প্রহর', trans: 'Midnight moments fade away enchanted within the depth of your eyes.' },
+          { time: 145, text: 'শুধু তুমি আর আমি আর অনন্ত সুরতরঙ্গ', trans: 'Only you, me, and eternal celestial soundwaves.' },
+          { time: 185, text: 'ঘুমিয়ে পড়ুক নগরী তারাদের কোলে শান্ত মনে', trans: 'Let the sleepless city rest peacefully in the embrace of stars.' }
+        ],
+        '2': [
+          { time: 0, text: 'আমি শুনেছি সেদিন তুমি সাগরের ঢেউয়ে চেপে', trans: 'I heard that day, riding atop the ocean waves, you flew into the blue.' },
+          { time: 24, text: 'নীল সীমানায় হারিয়ে গিয়েছো কোনো অচিন দেশে', trans: 'Lost at the indigo horizon, drifting to an uncharted haven of peace.' },
+          { time: 54, text: 'আমি শুনেছি সেদিন তুমি মেঘেদের গান গেয়ে', trans: 'I heard that day you sang serenades with the monsoon clouds.' },
+          { time: 88, text: 'বৃষ্টি ভেজা চায়ের কাপে আঁকছো স্মৃতির ছবি', trans: 'Drawing silhouettes of memories across a steaming, rain-streaked teacup.' },
+          { time: 128, text: 'মন কেমন করা এক দুপুরে সুরের আশ্রয়ে', trans: 'Finding sanctuary in melodies on a nostalgic, introspective afternoon.' },
+          { time: 172, text: 'আমিও ভাসতে চাই তোমার এই সুরের ভেলায়', trans: 'I too long to drift away with you on this raft of ambient frequencies.' },
+          { time: 215, text: 'রাত গভীর হলে সুরগুলো সব কথা বলে ওঠে', trans: 'When deep midnight falls, the ambient notes whisper ancient secrets.' }
+        ],
+        '3': [
+          { time: 0, text: 'সব লোকে কয় লালন কি জাত সংসারে', trans: 'Everyone asks what caste or creed mystic Lalon belongs to in this realm.' },
+          { time: 26, text: 'লালন কয় জাতের কি রূপ দেখলাম না এই নজরে', trans: 'Lalon contemplates: what form does creed take? I have never witnessed it.' },
+          { time: 62, text: 'ছুন্নত দিলে হয় মুসলমান, নারী জাতির কি হয় বিধান', trans: 'Outward rites divide the world, yet what marks the spirit within?' },
+          { time: 104, text: 'ব্রাহ্মণ চিনি পৈতা প্রমাণ, বামনী চিনি কিসে রে', trans: 'Signs distinguish mortals by day, but the soul shines undivided by night.' },
+          { time: 152, text: 'জগৎ বেড়ে জাতের কথা, লোকে গৌরব করে যথাতথা', trans: 'The world prattles of sects and names, boasting in vanity.' },
+          { time: 205, text: 'লালন সে জাতের ফাতা ডুবিয়েছে সাধবাজারে', trans: 'Lalon has dissolved all illusions in the bazaar of boundless devotion.' },
+          { time: 260, text: 'এক নদীর জলে ফুটে শত শত সুরের কমল', trans: 'From a single stream bloomed a hundred lotus blossoms of mystic sound.' }
+        ],
+        '4': [
+          { time: 0, text: 'চলো সবাই মিলে খুঁজি সেই হারানো পথ', trans: 'Let us together discover the forgotten path shrouded in midnight mist.' },
+          { time: 25, text: 'যেথা ভেজা রাস্তায় আঁকা নিয়নের আলপনা', trans: 'Where glistening asphalt is adorned with neon floral motifs.' },
+          { time: 56, text: 'স্মৃতির পাতায় শুধু বৃষ্টির দীর্ঘশ্বাস', trans: 'The pages of memory sigh with the rhythm of falling raindrops.' },
+          { time: 92, text: 'তবু এগিয়ে চলে রাতের নিঃসঙ্গ মুসাফির', trans: 'Still, the solitary nocturnal wanderer walks with resolute serenity.' },
+          { time: 135, text: 'ভেঙে যাক জীর্ণ দেয়াল, জেগে উঠুক সুরের আলো', trans: 'Let the worn walls crumble, letting radiant neon light awaken.' },
+          { time: 184, text: 'আমরা একই সুরে বাঁধা এই মহাজাগতিক রাতে', trans: 'We are intertwined in one frequency on this cosmic night.' },
+          { time: 235, text: 'আলো আসবেই নতুন ভোরের আঙিনায়', trans: 'Light will inevitably return to the courtyards of a brand new dawn.' }
+        ],
+        '5': [
+          { time: 0, text: 'Husn-e-jana ki tareef mumkin nahi, afreen afreen', trans: 'Praise for the beloved\'s transcendent grace is beyond all words, praise upon praise.' },
+          { time: 22, text: 'Chehra ik noor hai, husn ik taaza shola', trans: 'The countenance is pure celestial light, beauty like an ever-blossoming flame.' },
+          { time: 50, text: 'Aankhen jheel si gehri, baatein mastani', trans: 'Eyes deep as nocturnal mountain lakes, words intoxicating to the wanderer.' },
+          { time: 88, text: 'Dum ba dum teri justuju, pal pal tera intezaar', trans: 'With every breath I seek your essence; every second longs for your arrival.' },
+          { time: 128, text: 'Aisa dekha nahi khoobsurat koi, jism jaise ajanta ki murat koi', trans: 'Never has such sublime wonder walked the earth, timeless as sculpted temple art.' },
+          { time: 168, text: 'Rooh ko sukoon mil gaya tere har qadam par', trans: 'My spirit finds everlasting tranquility wherever your gentle footsteps fall.' },
+          { time: 200, text: 'Afreen afreen, husn-e-jana ki tareef mumkin nahi', trans: 'Praise be upon praise, beauty transcendent beyond the boundaries of speech.' }
+        ],
+        '6': [
+          { time: 0, text: 'It\'s your world and I\'m just living in it', trans: 'A soft acoustic waltz bathing in sunset warmth and analog vinyl crackle.' },
+          { time: 20, text: 'We were shining in the golden hour light', trans: 'Warm amber tones illuminating rain-dappled apartment windowpanes.' },
+          { time: 48, text: 'You slow down time just by standing next to me', trans: 'The universe suspends its hurried rush whenever you are close.' },
+          { time: 82, text: 'Guitars softly strumming in harmonic frequencies', trans: 'Soulful chords reverberating across the nocturnal sanctuary.' },
+          { time: 120, text: 'Let this golden dusk never fade into the dawn', trans: 'Holding this dreamy aesthetic second before the night consumes us.' },
+          { time: 160, text: 'Nothing can compete with the radiance in your eyes', trans: 'Not even the brightest constellations glistening over the city tonight.' }
+        ],
+        '7': [
+          { time: 0, text: 'নীরবতা ছুঁয়ে যায় তোমার প্রতিটি পদধ্বনি', trans: 'Silence touches every gentle echo of your footsteps in the evening glow.' },
+          { time: 24, text: 'গোধূলি আলোয় মিলিয়ে যায় পুরানো অভিমান', trans: 'Under twilight embers, all forgotten sorrows gently dissolve away.' },
+          { time: 55, text: 'জানালার পাশে পড়ে থাকে একাকী গিটার', trans: 'Beside the balcony window rests an acoustic guitar bathed in violet neon.' },
+          { time: 92, text: 'তুমি কি শুনছো এই সুদূরের নিস্তব্ধ গুঞ্জন?', trans: 'Can you hear the calm whisper floating through the purple horizon?' },
+          { time: 132, text: 'অপেক্ষা শুধু তোমার এক চিলতে হাসির জন্য', trans: 'Longing only for a fleeting smile to ignite the nocturnal sky.' },
+          { time: 178, text: 'ভেসে আসা সুরে ভিজে যায় শান্ত রাতের ধুলো', trans: 'Dusk dust softens under the dew of melancholic acoustic chords.' }
+        ],
+        '8': [
+          { time: 0, text: 'Rain droplets tapping the cafe glass in synchronized rhythm', trans: 'Warm espresso steam, distant jazz saxophone, and soft rainfall ASMR.' },
+          { time: 22, text: 'Neon signs reflecting on wet asphalt puddles at 2 AM', trans: 'Cyan and magenta refractions shimmering like electric liquid mirrors.' },
+          { time: 50, text: 'Lo-fi beats keeping time with my quiet thoughts', trans: 'Vinyl crackle wrapping around the soul like a warm velvet blanket.' },
+          { time: 86, text: 'The city sleeps while our sanctuary stays awake', trans: 'Safe within this cozy nocturnal corner, bathed in analog warmth.' },
+          { time: 128, text: 'Warm cinnamon notes blending with cold night breezes', trans: 'Gentle harmony for introspective dreamers and melancholic hearts.' },
+          { time: 175, text: 'Steam rises slowly as the cassette loop turns softly', trans: 'A gentle rhythm rocking the late night into meditative reverie.' }
+        ],
+        '9': [
+          { time: 0, text: 'Kinna sohna tainu rab ne banaya, dil kare vekhda rawan', trans: 'God shaped your spirit with pure stardust; my heart yearns only to gaze upon you.' },
+          { time: 26, text: 'Tere noor nal roshan hoya sara aalam', trans: 'With your celestial glow, the entire cosmos has ignited in luminescence.' },
+          { time: 64, text: 'Sufi sargam vargi teri meethi awaz', trans: 'Your melodic presence resonates like a timeless Sufi nocturnal trance.' },
+          { time: 108, text: 'Ishq da jaam peeke mast ho gaya rooh da saaz', trans: 'Drinking from the goblet of transcendent love, the spirit is freed.' },
+          { time: 156, text: 'Tere kadman ch meri jaan te jahan saara', trans: 'At your feet rests my devotion and the boundless expanse of worlds.' },
+          { time: 210, text: 'Dum mast qalandar har saah naal pukaran', trans: 'With every breath, the soul rejoices in ecstatic spiritual devotion.' },
+          { time: 265, text: 'Sohniya ve tere baajon chain na aave', trans: 'O Beloved, without your radiant aura, serenity remains distant.' }
+        ],
+        '10': [
+          { time: 0, text: 'Lost between cosmic frequencies and morning dreams', trans: 'A hypnotic synthwave trip drifting through velvet twilight nebulae.' },
+          { time: 24, text: 'Pulsing starlight maps uncharted corridors of space', trans: 'Electronic arpeggios echoing across neon magenta starfields.' },
+          { time: 56, text: 'Floating weightless past constellations and glowing comets', trans: 'Transcending the boundaries of earthly gravity in harmonic sync.' },
+          { time: 94, text: 'Analog synthesizers painting dreams upon the dark ether', trans: 'A pure sonic oasis designed for deep nocturnal introspection.' },
+          { time: 140, text: 'Echoing into the eternal silence of starlit tranquility', trans: 'Rest in the harmonic sanctuary of boundless peace and wonder.' },
+          { time: 190, text: 'Beyond the horizon where daylight and starlight become one', trans: 'Dissolving softly into infinite celestial reverberation.' }
+        ]
+      };
+
+      let currentLyricsTrackId = '1';
+      let currentActiveLineIdx = 0;
+      let autoScrollEnabled = true;
+      let showTranslations = true;
+
+      const lyricsStream = document.getElementById('lyrics-stream');
+      const lyricsScrollContainer = document.getElementById('lyrics-scroll-container');
+      const autoscrollToggleBtn = document.getElementById('lyrics-autoscroll-toggle');
+      const autoscrollIcon = document.getElementById('autoscroll-icon');
+      const autoscrollLabel = document.getElementById('autoscroll-label');
+      const langToggleBtn = document.getElementById('lyrics-lang-toggle');
+      const langLabel = document.getElementById('lyrics-lang-label');
+      const karaokeBtn = document.getElementById('lyrics-karaoke-btn');
+
+      function renderLyrics(trackId) {
+        if (!lyricsStream) return;
+        currentLyricsTrackId = String(trackId);
+        const lines = songLyricsDatabase[currentLyricsTrackId] || songLyricsDatabase['1'];
+        lyricsStream.innerHTML = '';
+
+        const activeRow = document.querySelector(`.track-row[data-id="${trackId}"]`);
+        const lang = activeRow ? activeRow.getAttribute('data-lang') : 'bangla';
+        if (langLabel) {
+          if (lang === 'urdu') {
+            langLabel.textContent = showTranslations ? 'Urdu & English Bilingual' : 'Urdu Nastaliq Only';
+          } else if (lang === 'panjabi') {
+            langLabel.textContent = showTranslations ? 'Panjabi & English Bilingual' : 'Panjabi Gurmukhi Only';
+          } else if (lang === 'english') {
+            langLabel.textContent = showTranslations ? 'English & Poetic Context' : 'English Only';
+          } else {
+            langLabel.textContent = showTranslations ? 'Bengali & English Bilingual' : 'Original Language Only';
+          }
+        }
+
+        lines.forEach((line, idx) => {
+          const lineDiv = document.createElement('div');
+          lineDiv.className = 'lyrics-line flex flex-col gap-1 p-2.5 rounded-xl cursor-pointer transition-all duration-300 opacity-40 hover:opacity-80';
+          lineDiv.setAttribute('data-index', idx);
+          lineDiv.setAttribute('data-time', line.time);
+          lineDiv.innerHTML = '<div class="flex items-center justify-between pointer-events-none">' +
+            '<span class="lyrics-main text-sm sm:text-base text-on-surface-variant font-medium tracking-wide transition-all">' + line.text + '</span>' +
+            '<span class="lyrics-badge material-symbols-outlined text-[18px] opacity-0 transition-opacity">music_note</span>' +
+            '</div>' +
+            '<span class="lyrics-trans text-xs text-on-surface-variant/70 italic transition-all ' + (showTranslations ? 'block' : 'hidden') + '">' + line.trans + '</span>';
+
+          lineDiv.addEventListener('click', () => {
+            if (typeof window.nusratSeekToTime === 'function') {
+              window.nusratSeekToTime(line.time);
+            }
+            highlightLyricLine(idx, true);
+          });
+          lyricsStream.appendChild(lineDiv);
+        });
+
+        currentActiveLineIdx = 0;
+        highlightLyricLine(0, false);
+        if (lyricsScrollContainer) {
+          lyricsScrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      function highlightLyricLine(idx, forceScroll) {
+        const lineElements = lyricsStream ? lyricsStream.querySelectorAll('.lyrics-line') : [];
+        if (!lineElements || lineElements.length === 0) return;
+        currentActiveLineIdx = idx;
+
+        lineElements.forEach((el, i) => {
+          const mainText = el.querySelector('.lyrics-main');
+          const transText = el.querySelector('.lyrics-trans');
+          const badge = el.querySelector('.lyrics-badge');
+
+          if (i === idx) {
+            el.className = 'lyrics-line flex flex-col gap-1 p-2.5 rounded-xl lyric-line-active cursor-pointer transition-all duration-300';
+            if (mainText) {
+              mainText.className = 'lyrics-main text-base sm:text-lg text-primary font-bold tracking-wide transition-all';
+            }
+            if (transText) {
+              transText.className = 'lyrics-trans text-xs sm:text-sm text-secondary font-medium tracking-wide transition-all ' + (showTranslations ? 'block' : 'hidden');
+            }
+            if (badge) {
+              badge.className = 'lyrics-badge material-symbols-outlined text-primary text-[20px] animate-pulse opacity-100 transition-opacity';
+              badge.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+            }
+
+            if ((forceScroll || autoScrollEnabled) && lyricsScrollContainer) {
+              const targetTop = el.offsetTop - (lyricsScrollContainer.clientHeight / 2) + (el.clientHeight / 2);
+              lyricsScrollContainer.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+            }
+          } else if (Math.abs(i - idx) === 1) {
+            el.className = 'lyrics-line flex flex-col gap-1 p-2.5 rounded-xl hover:bg-surface-container/40 cursor-pointer transition-all duration-300 opacity-60';
+            if (mainText) {
+              mainText.className = 'lyrics-main text-sm sm:text-base text-on-surface-variant font-medium tracking-wide transition-all';
+            }
+            if (transText) {
+              transText.className = 'lyrics-trans text-xs text-on-surface-variant/70 italic transition-all ' + (showTranslations ? 'block' : 'hidden');
+            }
+            if (badge) {
+              badge.className = 'lyrics-badge material-symbols-outlined text-[18px] opacity-0 transition-opacity';
+            }
+          } else {
+            el.className = 'lyrics-line flex flex-col gap-1 p-2.5 rounded-xl hover:bg-surface-container/30 cursor-pointer transition-all duration-300 opacity-30';
+            if (mainText) {
+              mainText.className = 'lyrics-main text-xs sm:text-sm text-on-surface-variant font-medium tracking-wide transition-all';
+            }
+            if (transText) {
+              transText.className = 'lyrics-trans text-xs text-on-surface-variant/60 italic transition-all ' + (showTranslations ? 'block' : 'hidden');
+            }
+            if (badge) {
+              badge.className = 'lyrics-badge material-symbols-outlined text-[18px] opacity-0 transition-opacity';
+            }
+          }
+        });
+      }
+
+      // Auto-scroll toggle
+      if (autoscrollToggleBtn) {
+        autoscrollToggleBtn.addEventListener('click', () => {
+          autoScrollEnabled = !autoScrollEnabled;
+          if (autoScrollEnabled) {
+            autoscrollToggleBtn.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container/70 border border-secondary-container/40 hover:border-secondary-container shadow-[0_0_12px_rgba(0,203,252,0.25)] transition-all cursor-pointer';
+            autoscrollIcon.className = 'material-symbols-outlined text-[15px] text-tertiary animate-pulse';
+            autoscrollIcon.textContent = 'graphic_eq';
+            autoscrollLabel.textContent = 'Auto-scroll ON';
+            autoscrollLabel.className = 'text-xs text-secondary font-medium tracking-wide';
+            highlightLyricLine(currentActiveLineIdx, true);
+          } else {
+            autoscrollToggleBtn.className = 'flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container/40 border border-surface-container-high hover:border-outline transition-all cursor-pointer opacity-70';
+            autoscrollIcon.className = 'material-symbols-outlined text-[15px] text-on-surface-variant';
+            autoscrollIcon.textContent = 'pause_circle';
+            autoscrollLabel.textContent = 'Auto-scroll OFF';
+            autoscrollLabel.className = 'text-xs text-on-surface-variant font-normal tracking-wide';
+          }
+        });
+      }
+
+      // Bilingual toggle
+      if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', () => {
+          showTranslations = !showTranslations;
+          const activeRow = document.querySelector(`.track-row[data-id="${currentLyricsTrackId}"]`);
+          const lang = activeRow ? activeRow.getAttribute('data-lang') : 'bangla';
+          if (showTranslations) {
+            if (lang === 'urdu') langLabel.textContent = 'Urdu & English Bilingual';
+            else if (lang === 'panjabi') langLabel.textContent = 'Panjabi & English Bilingual';
+            else if (lang === 'english') langLabel.textContent = 'English & Poetic Context';
+            else langLabel.textContent = 'Bengali & English Bilingual';
+          } else {
+            langLabel.textContent = 'Original Language Only';
+          }
+          const transNodes = lyricsStream ? lyricsStream.querySelectorAll('.lyrics-trans') : [];
+          transNodes.forEach(t => {
+            if (showTranslations) {
+              t.classList.remove('hidden');
+              t.classList.add('block');
+            } else {
+              t.classList.add('hidden');
+              t.classList.remove('block');
+            }
+          });
+        });
+      }
+
+      // Karaoke button
+      if (karaokeBtn) {
+        let isKaraoke = false;
+        karaokeBtn.addEventListener('click', () => {
+          isKaraoke = !isKaraoke;
+          karaokeBtn.classList.toggle('bg-primary-container/20', isKaraoke);
+          karaokeBtn.classList.toggle('text-primary-fixed', isKaraoke);
+          karaokeBtn.classList.toggle('shadow-[0_0_12px_rgba(255,113,206,0.5)]', isKaraoke);
+        });
+      }
+
+      // Global hooks for audio sync
+      window.nusratUpdateLyricsTime = function(seconds) {
+        const lines = songLyricsDatabase[currentLyricsTrackId] || [];
+        if (lines.length === 0) return;
+        let matchedIndex = 0;
+        for (let i = 0; i < lines.length; i++) {
+          if (seconds >= lines[i].time) {
+            matchedIndex = i;
+          } else {
+            break;
+          }
+        }
+        if (matchedIndex !== currentActiveLineIdx) {
+          highlightLyricLine(matchedIndex, autoScrollEnabled);
+        }
+      };
+
+      window.nusratOnTrackChange = function(trackId) {
+        renderLyrics(trackId);
+      };
+
+      renderLyrics('1');
+    })();
+  </script>
+<!-- Interactive JavaScript -->
+<script>
+    (function() {
+      // Audio State
+      let isPlaying = true;
+      let isMuted = false;
+      let isRepeat = false;
+      let isShuffle = false;
+      let currentSeconds = 0;
+      let totalSeconds = 222;
+      let currentActiveFilter = 'all';
+
+      // Helper function to format seconds to mm:ss
+      function formatTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      function parseTimeToSeconds(timeStr) {
+        if (!timeStr) return 200;
+        const parts = timeStr.trim().split(':');
+        if (parts.length === 2) {
+          return parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10);
+        }
+        return 200;
+      }
+
+      // DOM Elements
+      const playPauseBtn = document.getElementById('btn-play-pause');
+      const playIcon = document.getElementById('play-icon');
+      const vinylDisc = document.getElementById('vinyl-disc');
+      const vinylAura = document.getElementById('vinyl-aura');
+      const seekContainer = document.getElementById('seek-container');
+      const seekFill = document.getElementById('seek-fill');
+      const timeCurrent = document.getElementById('time-current');
+      const timeTotal = document.getElementById('time-total');
+      const playerTitle = document.getElementById('player-title');
+      const playerArtist = document.getElementById('player-artist');
+      const playerBadge = document.getElementById('player-badge');
+      const playerArt = document.getElementById('player-art');
+      const btnShuffle = document.getElementById('btn-shuffle');
+      const btnRepeat = document.getElementById('btn-repeat');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      const btnMute = document.getElementById('btn-mute');
+      const volFill = document.getElementById('vol-fill');
+      const volContainer = document.getElementById('vol-container');
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const trackRows = document.querySelectorAll('.track-row');
+
+      // Drawer Elements
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const drawerBackdrop = document.getElementById('drawerBackdrop');
+
+      function openDrawer() {
+        if (!mobileDrawer || !drawerBackdrop) return;
+        drawerBackdrop.classList.remove('hidden');
+        setTimeout(() => {
+          drawerBackdrop.classList.remove('opacity-0');
+          drawerBackdrop.classList.add('opacity-100');
+          mobileDrawer.classList.remove('translate-x-full');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        if (!mobileDrawer || !drawerBackdrop) return;
+        mobileDrawer.classList.add('translate-x-full');
+        drawerBackdrop.classList.remove('opacity-100');
+        drawerBackdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          drawerBackdrop.classList.add('hidden');
+          document.body.style.overflow = '';
+        }, 300);
+      }
+
+      if (hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+      if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+      if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDrawer();
+      });
+
+      // Update progress UI
+      function updateProgressUI() {
+        const percent = totalSeconds > 0 ? (currentSeconds / totalSeconds) * 100 : 0;
+        seekFill.style.width = Math.min(Math.max(percent, 0), 100) + '%';
+        timeCurrent.textContent = formatTime(currentSeconds);
+      }
+
+      // Toggle Play/Pause
+      function togglePlay() {
+        isPlaying = !isPlaying;
+        const visualizerBars = document.getElementById('audio-visualizer-bars');
+        if (isPlaying) {
+          playIcon.textContent = 'pause';
+          vinylDisc.style.animationPlayState = 'running';
+          vinylAura.classList.add('animate-pulse');
+          vinylAura.style.opacity = '0.35';
+          if (visualizerBars) visualizerBars.style.opacity = '1';
+        } else {
+          playIcon.textContent = 'play_arrow';
+          vinylDisc.style.animationPlayState = 'paused';
+          vinylAura.classList.remove('animate-pulse');
+          vinylAura.style.opacity = '0.08';
+          if (visualizerBars) visualizerBars.style.opacity = '0.4';
+        }
+      }
+
+      playPauseBtn.addEventListener('click', togglePlay);
+
+      // Seek Bar Click
+      seekContainer.addEventListener('click', (e) => {
+        const rect = seekContainer.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const percent = Math.min(Math.max((clickX / width), 0), 1);
+        currentSeconds = Math.floor(totalSeconds * percent);
+        updateProgressUI();
+        if (typeof window.nusratUpdateLyricsTime === 'function') {
+          window.nusratUpdateLyricsTime(currentSeconds);
+        }
+      });
+
+      // Volume Click
+      volContainer.addEventListener('click', (e) => {
+        const rect = volContainer.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const percent = Math.min(Math.max((clickX / width) * 100, 0), 100);
+        volFill.style.width = percent + '%';
+      });
+
+      // Mute Toggle
+      btnMute.addEventListener('click', () => {
+        isMuted = !isMuted;
+        if (isMuted) {
+          btnMute.firstElementChild.textContent = 'volume_off';
+          volFill.style.width = '0%';
+        } else {
+          btnMute.firstElementChild.textContent = 'volume_up';
+          volFill.style.width = '75%';
+        }
+      });
+
+      // Shuffle & Repeat
+      btnShuffle.addEventListener('click', () => {
+        isShuffle = !isShuffle;
+        btnShuffle.classList.toggle('text-secondary', isShuffle);
+        btnShuffle.classList.toggle('shadow-[0_0_12px_rgba(0,203,252,0.4)]', isShuffle);
+      });
+
+      btnRepeat.addEventListener('click', () => {
+        isRepeat = !isRepeat;
+        btnRepeat.classList.toggle('text-primary', isRepeat);
+        btnRepeat.classList.toggle('shadow-[0_0_12px_rgba(255,113,206,0.4)]', isRepeat);
+      });
+
+      // Track Row Selection
+      function loadTrack(row) {
+        trackRows.forEach(r => {
+          r.classList.remove('bg-surface-container-low/90', 'shadow-[0_0_20px_rgba(255,113,206,0.15)]');
+          const title = r.querySelector('.track-name');
+          const idx = r.querySelector('.track-index');
+          if (title) title.classList.remove('text-primary');
+          if (idx) idx.classList.remove('text-primary', 'font-bold');
+        });
+
+        row.classList.add('bg-surface-container-low/90', 'shadow-[0_0_20px_rgba(255,113,206,0.15)]');
+        const activeTitle = row.querySelector('.track-name');
+        const activeIdx = row.querySelector('.track-index');
+        if (activeTitle) activeTitle.classList.add('text-primary');
+        if (activeIdx) activeIdx.classList.add('text-primary', 'font-bold');
+
+        const title = row.getAttribute('data-title');
+        const artist = row.getAttribute('data-artist');
+        const dur = row.getAttribute('data-duration');
+        const lang = row.getAttribute('data-lang');
+        const trackId = row.getAttribute('data-id');
+        const rowImg = row.querySelector('img');
+
+        playerTitle.textContent = title;
+        playerArtist.textContent = artist;
+        timeTotal.textContent = dur;
+        totalSeconds = parseTimeToSeconds(dur);
+
+        currentSeconds = 0;
+        updateProgressUI();
+
+        if (typeof window.nusratOnTrackChange === 'function' && trackId) {
+          window.nusratOnTrackChange(trackId);
+        }
+
+        if (lang === 'bangla') {
+          playerBadge.textContent = 'Bangla Soul';
+        } else if (lang === 'urdu') {
+          playerBadge.textContent = 'Urdu Ghazal & Chill';
+        } else if (lang === 'panjabi') {
+          playerBadge.textContent = 'Panjabi Sufi Echoes';
+        } else if (lang === 'english') {
+          playerBadge.textContent = 'English Lo-Fi Acoustic';
+        }
+
+        if (rowImg && playerArt) {
+          playerArt.src = rowImg.src;
+          playerArt.alt = rowImg.alt;
+        }
+
+        if (!isPlaying) {
+          togglePlay();
+        } else {
+          vinylDisc.style.animationPlayState = 'running';
+          vinylAura.classList.add('animate-pulse');
+        }
+      }
+
+      window.nusratSeekToTime = function(sec) {
+        currentSeconds = Math.min(Math.max(sec, 0), totalSeconds);
+        updateProgressUI();
+        if (typeof window.nusratUpdateLyricsTime === 'function') {
+          window.nusratUpdateLyricsTime(currentSeconds);
+        }
+      };
+
+      trackRows.forEach(row => {
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('.btn-heart')) return;
+          loadTrack(row);
+        });
+      });
+
+      // Next & Prev Tracks
+      btnNext.addEventListener('click', () => {
+        const visibleRows = Array.from(trackRows).filter(r => r.style.display !== 'none');
+        if (visibleRows.length === 0) return;
+        const currentIndex = visibleRows.findIndex(r => r.querySelector('.track-name').textContent === playerTitle.textContent);
+        const nextIndex = (currentIndex + 1) % visibleRows.length;
+        loadTrack(visibleRows[nextIndex]);
+      });
+
+      btnPrev.addEventListener('click', () => {
+        const visibleRows = Array.from(trackRows).filter(r => r.style.display !== 'none');
+        if (visibleRows.length === 0) return;
+        const currentIndex = visibleRows.findIndex(r => r.querySelector('.track-name').textContent === playerTitle.textContent);
+        const prevIndex = (currentIndex - 1 + visibleRows.length) % visibleRows.length;
+        loadTrack(visibleRows[prevIndex]);
+      });
+
+      // Filtering Function
+      function applyFilter(filter) {
+        currentActiveFilter = filter;
+        trackRows.forEach(row => {
+          const lang = (row.getAttribute('data-lang') || '').toLowerCase();
+          const isFav = row.getAttribute('data-fav') === 'true';
+
+          if (filter === 'all') {
+            row.style.display = 'flex';
+          } else if (filter === 'favorites') {
+            row.style.display = isFav ? 'flex' : 'none';
+          } else {
+            row.style.display = (lang === filter) ? 'flex' : 'none';
+          }
+        });
+      }
+
+      // Favorite Heart Toggle
+      document.querySelectorAll('.btn-heart').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const row = btn.closest('.track-row');
+          const isFav = row.getAttribute('data-fav') === 'true';
+          const newFav = !isFav;
+          row.setAttribute('data-fav', newFav ? 'true' : 'false');
+          const icon = btn.querySelector('.material-symbols-outlined');
+          if (!newFav) {
+            icon.textContent = 'favorite_border';
+            btn.classList.remove('text-primary');
+            btn.classList.add('text-on-surface-variant');
+            icon.removeAttribute('style');
+          } else {
+            icon.textContent = 'favorite';
+            btn.classList.remove('text-on-surface-variant');
+            btn.classList.add('text-primary');
+            icon.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+          }
+          if (currentActiveFilter === 'favorites') {
+            applyFilter('favorites');
+          }
+        });
+      });
+
+      // Filter Chips Navigation
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          filterChips.forEach(c => {
+            c.className = 'filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container cursor-pointer';
+          });
+          chip.className = 'filter-chip shrink-0 px-4 py-1.5 rounded-full font-label-md text-xs sm:text-sm transition-all duration-200 bg-primary-container text-on-primary font-bold shadow-[0_0_16px_rgba(255,113,206,0.35)] cursor-pointer';
+
+          const filter = chip.getAttribute('data-filter');
+          applyFilter(filter);
+        });
+      });
+
+      // Progress Timer
+      setInterval(() => {
+        if (!isPlaying) return;
+        currentSeconds += 1;
+        if (currentSeconds >= totalSeconds) {
+          if (isRepeat) {
+            currentSeconds = 0;
+          } else {
+            const visibleRows = Array.from(trackRows).filter(r => r.style.display !== 'none');
+            if (visibleRows.length > 0) {
+              const currentIndex = visibleRows.findIndex(r => r.querySelector('.track-name').textContent === playerTitle.textContent);
+              const nextIndex = (currentIndex + 1) % visibleRows.length;
+              loadTrack(visibleRows[nextIndex]);
+              return;
+            }
+          }
+        }
+        updateProgressUI();
+        if (typeof window.nusratUpdateLyricsTime === 'function') {
+          window.nusratUpdateLyricsTime(currentSeconds);
+        }
+      }, 1000);
+
+      totalSeconds = parseTimeToSeconds(timeTotal.textContent);
+      currentSeconds = 0;
+      updateProgressUI();
+    })();
+  </script>
+</body></html>
